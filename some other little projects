@@ -1,0 +1,1244 @@
+{
+  "nbformat": 4,
+  "nbformat_minor": 0,
+  "metadata": {
+    "colab": {
+      "provenance": [],
+      "authorship_tag": "ABX9TyN8f4m5yng3CzREOaQoDMHS"
+    },
+    "kernelspec": {
+      "name": "python3",
+      "display_name": "Python 3"
+    },
+    "language_info": {
+      "name": "python"
+    }
+  },
+  "cells": [
+    {
+      "cell_type": "code",
+      "execution_count": null,
+      "metadata": {
+        "id": "C1hsvNd5mPPZ"
+      },
+      "outputs": [],
+      "source": [
+        "def longest(strings: list):\n",
+        "  longest_s=\"\"\n",
+        "  for string in strings:\n",
+        "    if len(string) > len(longest_s):\n",
+        "      longest_s = string\n",
+        "  return longest_s"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "def count_matching_elements(my_matrix: list, element: int):\n",
+        "  count=0;\n",
+        "  for a in my_matrix:\n",
+        "    for b in a:\n",
+        "     if b==element:\n",
+        "      count+=1\n",
+        "  return count;\n",
+        "m = [[1, 2, 1], [0, 3, 4], [1, 0, 0]]\n",
+        "print(count_matching_elements(m, 0))"
+      ],
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "Bxr-z5Kh5UUn",
+        "outputId": "47011c37-844a-4dd1-d4f3-ef2719523495"
+      },
+      "execution_count": null,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "3\n"
+          ]
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "def who_won(game_board: list):\n",
+        "  p1=0\n",
+        "  p2=0\n",
+        "  for row in game_board:\n",
+        "    for col in row:\n",
+        "      if col ==1:\n",
+        "        p1+=1\n",
+        "      elif col==2:\n",
+        "        p2+=1\n",
+        "  if p1>p2:\n",
+        "    return \"Player 1\"\n",
+        "  elif p2>p1:\n",
+        "    return \"Player 2\"\n",
+        "  else:\n",
+        "    return \"Draw\"\n",
+        "l = [[1,2,2],[1,0,2],[1,0,2]]\n",
+        "print(who_won(l))"
+      ],
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "p0LsLmxQ-YW2",
+        "outputId": "1f0930f7-e390-45f8-d912-27c86f49d687"
+      },
+      "execution_count": null,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "Player 2\n"
+          ]
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "def column_correct(sudoku: list, column_no: int):\n",
+        " l=[]\n",
+        " a=0\n",
+        " for row in sudoku:\n",
+        "  if row[column_no]>0 and row[column_no] in l:\n",
+        "    return False\n",
+        "  else:\n",
+        "   l.append(row[column_no])\n",
+        " return True\n",
+        "sudoku = [\n",
+        "  [9, 0, 0, 0, 8, 0, 3, 0, 0],\n",
+        "  [2, 0, 0, 2, 5, 0, 7, 0, 0],\n",
+        "  [0, 2, 0, 3, 0, 0, 0, 0, 4],\n",
+        "  [2, 9, 4, 0, 0, 0, 0, 0, 0],\n",
+        "  [0, 0, 0, 7, 3, 0, 5, 6, 0],\n",
+        "  [7, 0, 5, 0, 6, 0, 4, 0, 0],\n",
+        "  [0, 0, 7, 8, 0, 3, 9, 0, 0],\n",
+        "  [0, 0, 1, 0, 0, 0, 0, 0, 3],\n",
+        "  [3, 0, 0, 0, 0, 0, 0, 0, 2]\n",
+        "]\n",
+        "\n",
+        "print(column_correct(sudoku, 0))\n",
+        "print(column_correct(sudoku, 1))"
+      ],
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "RIcWSAKQAbvc",
+        "outputId": "0e093909-f1b9-455a-9b34-0864c60d0c98"
+      },
+      "execution_count": null,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "False\n",
+            "True\n"
+          ]
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "def block_correct(sudoku: list, row_no: int, column_no: int):\n",
+        "  l=[]\n",
+        "  for i in range(row_no,row_no+3):\n",
+        "    for j in range(column_no,column_no+3):\n",
+        "      if sudoku[i][j]>0 and sudoku[i][j] in l:\n",
+        "        return False\n",
+        "      else:\n",
+        "        l.append(sudoku[i][j])\n",
+        "  return True\n",
+        "sudoku = [\n",
+        "  [9, 0, 0, 0, 8, 0, 3, 0, 0],\n",
+        "  [2, 0, 0, 2, 5, 0, 7, 0, 0],\n",
+        "  [0, 2, 0, 3, 0, 0, 0, 0, 4],\n",
+        "  [2, 9, 4, 0, 0, 0, 0, 0, 0],\n",
+        "  [0, 0, 0, 7, 3, 0, 5, 6, 0],\n",
+        "  [7, 0, 5, 0, 6, 0, 4, 0, 0],\n",
+        "  [0, 0, 7, 8, 0, 3, 9, 0, 0],\n",
+        "  [0, 0, 1, 0, 0, 0, 0, 0, 3],\n",
+        "  [3, 0, 0, 0, 0, 0, 0, 0, 2]\n",
+        "]\n",
+        "\n",
+        "print(block_correct(sudoku, 0, 0))\n",
+        "print(block_correct(sudoku, 1, 2))"
+      ],
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "h-Z5SMB3Wwap",
+        "outputId": "64a4c449-b7c1-4c14-d66a-958d6cde83f2"
+      },
+      "execution_count": null,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "False\n",
+            "True\n"
+          ]
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "def block_correct(sudoku: list, row_no: int, column_no: int):\n",
+        "  l=[]\n",
+        "  for i in range(row_no,row_no+3):\n",
+        "    for j in range(column_no,column_no+3):\n",
+        "      if sudoku[i][j]>0 and sudoku[i][j] in l:\n",
+        "        return False\n",
+        "      else:\n",
+        "        l.append(sudoku[i][j])\n",
+        "  return True\n",
+        "def column_correct(sudoku: list, column_no: int):\n",
+        " l=[]\n",
+        " a=0\n",
+        " for row in sudoku:\n",
+        "  if row[column_no]>0 and row[column_no] in l:\n",
+        "    return False\n",
+        "  else:\n",
+        "   l.append(row[column_no])\n",
+        " return True\n",
+        "def row_correct(sudoku: list, row_no: int):\n",
+        " l=[]\n",
+        " a=0\n",
+        " for col in sudoku[row_no]:\n",
+        "  if col>0 and col in l:\n",
+        "    return False\n",
+        "  else:\n",
+        "   l.append(col)\n",
+        " return True\n",
+        "def sudoku_grid_correct(sudoku: list):\n",
+        "  for i in range(9):\n",
+        "    if not row_correct(sudoku,i):\n",
+        "      return False\n",
+        "  for i in range(9):\n",
+        "    if not column_correct(sudoku,i):\n",
+        "      return False\n",
+        "  for i in range(9,3):\n",
+        "    for j in range(9,3):\n",
+        "      if not block_correct(sudoku,i,j):\n",
+        "        return False\n",
+        "  return True\n",
+        "sudoku1 = [\n",
+        "  [9, 0, 0, 0, 8, 0, 3, 0, 0],\n",
+        "  [2, 0, 0, 2, 5, 0, 7, 0, 0],\n",
+        "  [0, 2, 0, 3, 0, 0, 0, 0, 4],\n",
+        "  [2, 9, 4, 0, 0, 0, 0, 0, 0],\n",
+        "  [0, 0, 0, 7, 3, 0, 5, 6, 0],\n",
+        "  [7, 0, 5, 0, 6, 0, 4, 0, 0],\n",
+        "  [0, 0, 7, 8, 0, 3, 9, 0, 0],\n",
+        "  [0, 0, 1, 0, 0, 0, 0, 0, 3],\n",
+        "  [3, 0, 0, 0, 0, 0, 0, 0, 2]\n",
+        "]\n",
+        "\n",
+        "print(sudoku_grid_correct(sudoku1))\n",
+        "\n",
+        "sudoku2 = [\n",
+        "  [2, 6, 7, 8, 3, 9, 5, 0, 4],\n",
+        "  [9, 0, 3, 5, 1, 0, 6, 0, 0],\n",
+        "  [0, 5, 1, 6, 0, 0, 8, 3, 9],\n",
+        "  [5, 1, 9, 0, 4, 6, 3, 2, 8],\n",
+        "  [8, 0, 2, 1, 0, 5, 7, 0, 6],\n",
+        "  [6, 7, 4, 3, 2, 0, 0, 0, 5],\n",
+        "  [0, 0, 0, 4, 5, 7, 2, 6, 3],\n",
+        "  [3, 2, 0, 0, 8, 0, 0, 5, 7],\n",
+        "  [7, 4, 5, 0, 0, 3, 9, 0, 1]\n",
+        "]\n",
+        "\n",
+        "print(sudoku_grid_correct(sudoku2))"
+      ],
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "BwBbsVAHmd3H",
+        "outputId": "4b9cb7df-5bc0-4892-da45-f167e8b52361"
+      },
+      "execution_count": null,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "False\n",
+            "True\n"
+          ]
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "def double_items(numbers: list):\n",
+        "  newl=[]\n",
+        "  for number in numbers:\n",
+        "    newl.append(number*2)\n",
+        "  return newl\n",
+        "print(double_items([1,2,3]))"
+      ],
+      "metadata": {
+        "id": "xbRyXfAzrQXS"
+      },
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "def remove_smallest(numbers: list):\n",
+        "  numbers.remove(min(numbers))\n",
+        "  return numbers\n",
+        "numbers = [2, 4, 6, 1, 3, 5]\n",
+        "remove_smallest(numbers)\n",
+        "print(numbers)"
+      ],
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "gLOs6QAO9lK1",
+        "outputId": "36f3975c-f812-499a-a14f-3f69ba44e94b"
+      },
+      "execution_count": null,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "[2, 4, 6, 3, 5]\n"
+          ]
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "def print_sudoku(sudoku: list):\n",
+        "  a=0\n",
+        "  b=0\n",
+        "  for row in sudoku:\n",
+        "    if b % 3 == 0:\n",
+        "          print()\n",
+        "    for num in row:\n",
+        "      if num == 0:\n",
+        "        print('_', end=' ')\n",
+        "        a+=1\n",
+        "        if a % 3 == 0:\n",
+        "          print(' ', end=' ')\n",
+        "      else:\n",
+        "        print(num, end=' ')\n",
+        "        a+=1\n",
+        "        if a % 3 == 0:\n",
+        "          print(' ', end=' ')\n",
+        "    print()\n",
+        "    b+=1\n",
+        "def add_number(sudoku: list, row_no: int, column_no: int, number:int):\n",
+        "  sudoku[row_no][column_no]=number\n",
+        "  return sudoku\n",
+        "sudoku  = [\n",
+        "    [0, 0, 0, 0, 0, 0, 0, 0, 0],\n",
+        "    [0, 0, 0, 0, 0, 0, 0, 0, 0],\n",
+        "    [0, 0, 0, 0, 0, 0, 0, 0, 0],\n",
+        "    [0, 0, 0, 0, 0, 0, 0, 0, 0],\n",
+        "    [0, 0, 0, 0, 0, 0, 0, 0, 0],\n",
+        "    [0, 0, 0, 0, 0, 0, 0, 0, 0],\n",
+        "    [0, 0, 0, 0, 0, 0, 0, 0, 0],\n",
+        "    [0, 0, 0, 0, 0, 0, 0, 0, 0],\n",
+        "    [0, 0, 0, 0, 0, 0, 0, 0, 0]\n",
+        "]\n",
+        "\n",
+        "print_sudoku(sudoku)\n",
+        "add_number(sudoku, 0, 0, 2)\n",
+        "add_number(sudoku, 1, 2, 7)\n",
+        "add_number(sudoku, 5, 7, 3)\n",
+        "print()\n",
+        "print(\"Three numbers added:\")\n",
+        "print()\n",
+        "print_sudoku(sudoku)"
+      ],
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "AHyxujmt-M4L",
+        "outputId": "1b1a6bce-e161-4cb9-e6dc-4968790c7980"
+      },
+      "execution_count": null,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "\n",
+            "_ _ _   _ _ _   _ _ _   \n",
+            "_ _ _   _ _ _   _ _ _   \n",
+            "_ _ _   _ _ _   _ _ _   \n",
+            "\n",
+            "_ _ _   _ _ _   _ _ _   \n",
+            "_ _ _   _ _ _   _ _ _   \n",
+            "_ _ _   _ _ _   _ _ _   \n",
+            "\n",
+            "_ _ _   _ _ _   _ _ _   \n",
+            "_ _ _   _ _ _   _ _ _   \n",
+            "_ _ _   _ _ _   _ _ _   \n",
+            "\n",
+            "Three numbers added:\n",
+            "\n",
+            "\n",
+            "2 _ _   _ _ _   _ _ _   \n",
+            "_ _ 7   _ _ _   _ _ _   \n",
+            "_ _ _   _ _ _   _ _ _   \n",
+            "\n",
+            "_ _ _   _ _ _   _ _ _   \n",
+            "_ _ _   _ _ _   _ _ _   \n",
+            "_ _ _   _ _ _   _ 3 _   \n",
+            "\n",
+            "_ _ _   _ _ _   _ _ _   \n",
+            "_ _ _   _ _ _   _ _ _   \n",
+            "_ _ _   _ _ _   _ _ _   \n"
+          ]
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "import copy\n",
+        "def copy_and_add(sudoku: list, row_no: int, column_no: int, number: int):\n",
+        "  kopya=copy.deepcopy(sudoku)\n",
+        "  kopya[row_no][column_no]=number\n",
+        "  return kopya\n",
+        "def print_sudoku(sudoku: list):\n",
+        "  a=0\n",
+        "  b=0\n",
+        "  for row in sudoku:\n",
+        "    if b % 3 == 0:\n",
+        "          print()\n",
+        "    for num in row:\n",
+        "      if num == 0:\n",
+        "        print('_', end=' ')\n",
+        "        a+=1\n",
+        "        if a % 3 == 0:\n",
+        "          print(' ', end=' ')\n",
+        "      else:\n",
+        "        print(num, end=' ')\n",
+        "        a+=1\n",
+        "        if a % 3 == 0:\n",
+        "          print(' ', end=' ')\n",
+        "    print()\n",
+        "    b+=1\n",
+        "sudoku  = [\n",
+        "    [0, 0, 0, 0, 0, 0, 0, 0, 0],\n",
+        "    [0, 0, 0, 0, 0, 0, 0, 0, 0],\n",
+        "    [0, 0, 0, 0, 0, 0, 0, 0, 0],\n",
+        "    [0, 0, 0, 0, 0, 0, 0, 0, 0],\n",
+        "    [0, 0, 0, 0, 0, 0, 0, 0, 0],\n",
+        "    [0, 0, 0, 0, 0, 0, 0, 0, 0],\n",
+        "    [0, 0, 0, 0, 0, 0, 0, 0, 0],\n",
+        "    [0, 0, 0, 0, 0, 0, 0, 0, 0],\n",
+        "    [0, 0, 0, 0, 0, 0, 0, 0, 0]\n",
+        "]\n",
+        "\n",
+        "grid_copy = copy_and_add(sudoku, 0, 0, 2)\n",
+        "print(\"Original:\")\n",
+        "print_sudoku(sudoku)\n",
+        "print()\n",
+        "print(\"Copy:\")\n",
+        "print_sudoku(grid_copy)\n"
+      ],
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "wfAHLeISBCG0",
+        "outputId": "608e39d7-5bd7-4b05-bfd8-6d15959f2884"
+      },
+      "execution_count": null,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "Original:\n",
+            "\n",
+            "_ _ _   _ _ _   _ _ _   \n",
+            "_ _ _   _ _ _   _ _ _   \n",
+            "_ _ _   _ _ _   _ _ _   \n",
+            "\n",
+            "_ _ _   _ _ _   _ _ _   \n",
+            "_ _ _   _ _ _   _ _ _   \n",
+            "_ _ _   _ _ _   _ _ _   \n",
+            "\n",
+            "_ _ _   _ _ _   _ _ _   \n",
+            "_ _ _   _ _ _   _ _ _   \n",
+            "_ _ _   _ _ _   _ _ _   \n",
+            "\n",
+            "Copy:\n",
+            "\n",
+            "2 _ _   _ _ _   _ _ _   \n",
+            "_ _ _   _ _ _   _ _ _   \n",
+            "_ _ _   _ _ _   _ _ _   \n",
+            "\n",
+            "_ _ _   _ _ _   _ _ _   \n",
+            "_ _ _   _ _ _   _ _ _   \n",
+            "_ _ _   _ _ _   _ _ _   \n",
+            "\n",
+            "_ _ _   _ _ _   _ _ _   \n",
+            "_ _ _   _ _ _   _ _ _   \n",
+            "_ _ _   _ _ _   _ _ _   \n"
+          ]
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "def histogram(word):\n",
+        "  b=[]\n",
+        "  for i in range(len(word)):\n",
+        "    if word[i] not in b:\n",
+        "     b.append(word[i])\n",
+        "     a=0\n",
+        "     for j in range(len(word)):\n",
+        "       if word[i]==word[j]:\n",
+        "         a+=1\n",
+        "     print(word[i],a*\"*\")\n",
+        "histogram(\"statisticly\")\n"
+      ],
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "Kk_hkqacRMdk",
+        "outputId": "db182d8a-489b-412a-871c-18096c8135bf"
+      },
+      "execution_count": null,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "s **\n",
+            "t ***\n",
+            "a *\n",
+            "i **\n",
+            "c *\n",
+            "l *\n",
+            "y *\n"
+          ]
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "def factorial(x:int):\n",
+        "  if x==0 or x==1:\n",
+        "    return 1\n",
+        "  else:\n",
+        "    return x*factorial(x-1)\n",
+        "print(factorial(5))"
+      ],
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "Xo25DZ4s31r8",
+        "outputId": "b73a5cff-6d52-449b-e065-d09baf2bba72"
+      },
+      "execution_count": null,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "120\n"
+          ]
+        }
+      ]
+    },
+    {
+      "source": [
+        "def times_ten(start_index: int, end_index: int):\n",
+        "  my_dict = {}\n",
+        "  for i in range(start_index, end_index + 1):\n",
+        "    my_dict[i] = i * 10\n",
+        "  return my_dict\n",
+        "\n",
+        "# Example usage\n",
+        "d = times_ten(3, 6)\n",
+        "print(d)"
+      ],
+      "cell_type": "code",
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "NwWJqh2h4_Hg",
+        "outputId": "a392003f-2497-4c84-d09e-ae7e5d7190c2"
+      },
+      "execution_count": null,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "{3: 30, 4: 40, 5: 50, 6: 60}\n"
+          ]
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "com = 0\n",
+        "soz = {}\n",
+        "while com != 3:\n",
+        " com = int(input(\"komut (1 ara, 2 ekle, 3 çık):\")) # Girişi integer'a dönüştürmek iyi olabilir\n",
+        "\n",
+        " if com == 1:\n",
+        "  ad=input(\"isim:\")\n",
+        "  if ad not in soz:\n",
+        "     print(\"Böyle bir kayıt yok\")\n",
+        "  else :\n",
+        "     print(soz[ad])\n",
+        "\n",
+        " elif com == 2:\n",
+        "   ad = input(\"isim:\")\n",
+        "   num = input(\"numara:\")\n",
+        "   # Check if the name already exists in the dictionary\n",
+        "   if ad in soz:\n",
+        "       # If it exists, append the new number\n",
+        "       soz[ad] = soz[ad] + \",\" + num\n",
+        "   else:\n",
+        "       # If it doesn't exist, add the name and the number as a new entry\n",
+        "       soz[ad] = num\n",
+        " elif com == 3:\n",
+        "   print(\"Çıkılıyor...\")\n",
+        " else:\n",
+        "   print(\"Geçersiz komut\")"
+      ],
+      "metadata": {
+        "id": "wluJ2PoT6kvR",
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "outputId": "5f626e52-973f-48cc-e0b7-fcd1d8840116"
+      },
+      "execution_count": null,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "komut (1 ara, 2 ekle, 3 çık):2\n",
+            "isim:ad\n",
+            "numara:31\n",
+            "komut (1 ara, 2 ekle, 3 çık):2\n",
+            "isim:ad\n",
+            "numara:32\n",
+            "komut (1 ara, 2 ekle, 3 çık):1\n",
+            "isim:ad\n",
+            "31,32\n",
+            "komut (1 ara, 2 ekle, 3 çık):3\n",
+            "Çıkılıyor...\n"
+          ]
+        }
+      ]
+    },
+    {
+      "source": [
+        "com = 0\n",
+        "soz = {}\n",
+        "while com != 3:\n",
+        " com = int(input(\"komut (1 ara, 2 ekle, 3 çık):\")) # Girişi integer'a dönüştürmek iyi olabilir\n",
+        "\n",
+        " if com == 1:\n",
+        "  ad=input(\"isim:\")\n",
+        "  if ad not in soz:\n",
+        "     print(\"Böyle bir kayıt yok\")\n",
+        "  else :\n",
+        "     print(soz[ad])\n",
+        "\n",
+        " elif com == 2:\n",
+        "   ad = input(\"isim:\")\n",
+        "   num = input(\"numara:\")\n",
+        "   soz[ad] = num # Sözlüğe ekleme\n",
+        " elif com == 3:\n",
+        "   print(\"Çıkılıyor...\")\n",
+        " else:\n",
+        "   print(\"Geçersiz komut\")\n",
+        "\n"
+      ],
+      "cell_type": "code",
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "mC0OKj2Al2vw",
+        "outputId": "2698f47c-6950-4030-f15f-42b8f615b793"
+      },
+      "execution_count": null,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "komut (1 ara, 2 ekle, 3 çık):2\n",
+            "isim:ad\n",
+            "numara:31\n",
+            "komut (1 ara, 2 ekle, 3 çık):1\n",
+            "isim:mary\n",
+            "Böyle bir kayıt yok\n",
+            "komut (1 ara, 2 ekle, 3 çık):3\n",
+            "Çıkılıyor...\n"
+          ]
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "def add_movie(database: list, name: str, director: str, year: int, runtime: int):\n",
+        "  database.append({\"name\": name, \"director\": director, \"year\": year, \"runtime\": runtime})\n",
+        "database = []\n",
+        "add_movie(database, \"Gone with the Python\", \"Victor Pything\", 2017, 116)\n",
+        "add_movie(database, \"Pythons on a Plane\", \"Renny Pytholin\", 2001, 94)\n",
+        "print(database)"
+      ],
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "fQBtCf63vaEo",
+        "outputId": "2eabd31c-4a21-4998-fc91-f54428e22bbd"
+      },
+      "execution_count": null,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "[{'name': 'Gone with the Python', 'director': 'Victor Pything', 'year': 2017, 'runtime': 116}, {'name': 'Pythons on a Plane', 'director': 'Renny Pytholin', 'year': 2001, 'runtime': 94}]\n"
+          ]
+        }
+      ]
+    },
+    {
+      "source": [
+        "def invert(dictionary: dict):\n",
+        "  inverted_dict = {}\n",
+        "  for key, value in dictionary.items():\n",
+        "    inverted_dict[value] = key\n",
+        "  dictionary.clear()  # Clear the original dictionary\n",
+        "  dictionary.update(inverted_dict) # Update with inverted key-value pairs\n",
+        "\n",
+        "s = {1: \"first\", 2: \"second\", 3: \"third\", 4: \"fourth\"}\n",
+        "invert(s)\n",
+        "print(s)"
+      ],
+      "cell_type": "code",
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "nGLLALDdEvnu",
+        "outputId": "0e4dbe1a-43f5-497c-f4d2-e4ff80817374"
+      },
+      "execution_count": null,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "{'first': 1, 'second': 2, 'third': 3, 'fourth': 4}\n"
+          ]
+        }
+      ]
+    },
+    {
+      "source": [
+        "def dict_of_numbers():\n",
+        "  units = [\"\", \"one\", \"two\", \"three\", \"four\", \"five\", \"six\", \"seven\", \"eight\", \"nine\"]\n",
+        "  teens = [\"ten\", \"eleven\", \"twelve\", \"thirteen\", \"fourteen\", \"fifteen\", \"sixteen\", \"seventeen\", \"eighteen\", \"nineteen\"]\n",
+        "  tens = [\"\", \"\", \"twenty\", \"thirty\", \"forty\", \"fifty\", \"sixty\", \"seventy\", \"eighty\", \"ninety\"]\n",
+        "\n",
+        "  numbers_dict = {}\n",
+        "  for i in range(100):\n",
+        "    if 0 <= i < 10:\n",
+        "      numbers_dict[i] = units[i]\n",
+        "    elif 10 <= i < 20:\n",
+        "      numbers_dict[i] = teens[i - 10]\n",
+        "    elif 20 <= i < 100:\n",
+        "      tens_digit = i // 10\n",
+        "      units_digit = i % 10\n",
+        "      if units_digit == 0:\n",
+        "        numbers_dict[i] = tens[tens_digit]\n",
+        "      else:\n",
+        "        numbers_dict[i] = tens[tens_digit] + \"-\" + units[units_digit]\n",
+        "\n",
+        "  return numbers_dict\n",
+        "\n",
+        "numbers = dict_of_numbers()\n",
+        "print(numbers[2])\n",
+        "print(numbers[11])\n",
+        "print(numbers[45])\n",
+        "print(numbers[99])\n",
+        "print(numbers[0])"
+      ],
+      "cell_type": "code",
+      "metadata": {
+        "id": "CBX8-XPUFTTs"
+      },
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "def find_movies(database: list, search_term: str):\n",
+        "    search_term = search_term.lower()\n",
+        "    result = []\n",
+        "\n",
+        "    for movie in database:\n",
+        "        title = movie[\"name\"].lower()\n",
+        "        if search_term in title:\n",
+        "            result.append(movie)\n",
+        "\n",
+        "    return result\n",
+        "\n",
+        "database = [{\"name\": \"Gone with the Python\", \"director\": \"Victor Pything\", \"year\": 2017, \"runtime\": 116},\n",
+        "{\"name\": \"Pythons on a Plane\", \"director\": \"Renny Pytholin\", \"year\": 2001, \"runtime\": 94},\n",
+        "{\"name\": \"Dawn of the Dead Programmers\", \"director\": \"M. Night Python\", \"year\": 2011, \"runtime\": 101}]\n",
+        "\n",
+        "my_movies = find_movies(database, \"Python\")\n",
+        "print(my_movies)"
+      ],
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "bO4Yeau6GB6b",
+        "outputId": "97bbc295-171c-42dc-f0cc-51cd29182e08"
+      },
+      "execution_count": null,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "[{'name': 'Gone with the Python', 'director': 'Victor Pything', 'year': 2017, 'runtime': 116}, {'name': 'Pythons on a Plane', 'director': 'Renny Pytholin', 'year': 2001, 'runtime': 94}]\n"
+          ]
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "def create_tuple(x: int, y: int, z: int):\n",
+        "  dizi=[x,y,z]\n",
+        "  dizi.sort()\n",
+        "  deste=(dizi[0],dizi[2],dizi[1])\n",
+        "  return deste\n",
+        "print(create_tuple(5, 3, -1))"
+      ],
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "T7D1AqWKLN2I",
+        "outputId": "23c30097-e129-489b-9fd0-5b53121ae123"
+      },
+      "execution_count": null,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "(-1, 5, 3)\n"
+          ]
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "def older_people(people: list, year: int):\n",
+        "  person=[]\n",
+        "  for i in range(len(people)):\n",
+        "    if people[i][1]<year:\n",
+        "      person.append(people[i][0])\n",
+        "  return person\n",
+        "p1 = (\"Adam\", 1977)\n",
+        "p2 = (\"Ellen\", 1985)\n",
+        "p3 = (\"Mary\", 1953)\n",
+        "p4 = (\"Ernest\", 1997)\n",
+        "people = [p1, p2, p3, p4]\n",
+        "print(older_people(people, 1980))\n"
+      ],
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "4jhjrOn_SfLW",
+        "outputId": "423b7c96-a40f-404c-e206-52a1f1a409cd"
+      },
+      "execution_count": null,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "['Adam', 'Mary']\n"
+          ]
+        }
+      ]
+    },
+    {
+      "source": [
+        "def oldest_person(people: list):\n",
+        "  biggest_year = float('inf') # Initialize with a very large year\n",
+        "  oldest_name = \"\" # Initialize with an empty string\n",
+        "\n",
+        "  for person in people:\n",
+        "    name, year = person # Unpack the tuple\n",
+        "    if year < biggest_year: # Compare years to find the oldest\n",
+        "      biggest_year = year\n",
+        "      oldest_name = name\n",
+        "\n",
+        "  return oldest_name # Return the name of the oldest person\n",
+        "\n",
+        "p1 = (\"Adam\", 1977)\n",
+        "p2 = (\"Ellen\", 1985)\n",
+        "p3 = (\"Mary\", 1953)\n",
+        "p4 = (\"Ernest\", 1997)\n",
+        "people = [p1, p2, p3, p4]\n",
+        "\n",
+        "print(oldest_person(people))"
+      ],
+      "cell_type": "code",
+      "metadata": {
+        "id": "5bMYnOa9Vjoy"
+      },
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "import math\n",
+        "def hypotenuse(leg1: float, leg2: float):\n",
+        "  doub=0\n",
+        "  doub+=leg1*leg1+leg2*leg2\n",
+        "  return math.sqrt(doub)\n",
+        "print(hypotenuse(3,4))"
+      ],
+      "metadata": {
+        "id": "MiIY0ZBHWo1M",
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "outputId": "b4d01208-d6cb-4817-eee3-26f37d7ea638"
+      },
+      "execution_count": null,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "5.0\n"
+          ]
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "import random\n",
+        "def gen(num:int):\n",
+        "  a=\"\"\n",
+        "  s=0\n",
+        "  while len(a)<num:\n",
+        "    s=random.randint(0,29)\n",
+        "    a+=chr(s)\n",
+        "  return a\n",
+        "for i in range(10):\n",
+        "    print(gen(8))"
+      ],
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "MeWeRD5mbYIy",
+        "outputId": "f9de6e43-4f18-4055-8fb2-b7467b5bd75b"
+      },
+      "execution_count": null,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "\u000e\u001a\u0017\u0012\u0017\u0000\u0014\u0002\n",
+            "\u0018\u0013\u0012\u001c\u0007\u0018\u0000\u001a\n",
+            "\u0017\u001b\u000b\r\r\u0004\u0015\u0012\n",
+            "\u0017\u0003\u001b\u0010\f\u0016\b\u0004\n",
+            "\u0001\u0006\u0001\u0005\n",
+            "\u0012\u0011\u001a\n",
+            "\u0000\u0006\t\u0017\b\u001a\u0004\u0019\n",
+            "\u0018\u0015\u000b\u0016\u0012\u0010\u0002\u0010\n",
+            "\u000e\u0010\u001c\f\n",
+            "\u0011\u0017\u0000\n",
+            "\u0014\f\u0016\u000f\u0002\f\u0002\u0013\n",
+            "\u0006\u001a\u0004\u0006\u0010\u001c\u001b\u0005\n"
+          ]
+        }
+      ]
+    },
+    {
+      "source": [
+        "import random\n",
+        "\n",
+        "def lottery_numbers(amount: int, lower: int, upper: int):\n",
+        "\n",
+        "  dizi = []\n",
+        "  while len(dizi) < amount: # Keep generating numbers until we have 'amount' unique numbers\n",
+        "    generated_number = random.randint(lower, upper)\n",
+        "    if generated_number not in dizi: # Check for uniqueness\n",
+        "      dizi.append(generated_number)\n",
+        "\n",
+        "  dizi.sort() # Sort the list in ascending order\n",
+        "  return dizi\n",
+        "\n",
+        "# Example usage based on the user's request\n",
+        "for number in lottery_numbers(7, 1, 40):\n",
+        "    print(number)\n",
+        "\n",
+        "print(lottery_numbers(5, 1, 49)) # Example from previous code"
+      ],
+      "cell_type": "code",
+      "metadata": {
+        "id": "nr5Jq8N1Qm5s"
+      },
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "source": [
+        "from fractions import Fraction\n",
+        "\n",
+        "def fractionate(amount: int):\n",
+        "  \"\"\"\n",
+        "  Divides the number 1 into equal-sized fractions.\n",
+        "\n",
+        "  Args:\n",
+        "    amount: The number of equal parts to divide 1 into.\n",
+        "\n",
+        "  Returns:\n",
+        "    A list of Fraction objects representing the equal parts.\n",
+        "  \"\"\"\n",
+        "  fraction_list = []\n",
+        "  for _ in range(amount):\n",
+        "    fraction_list.append(Fraction(1, amount))\n",
+        "  return fraction_list\n",
+        "\n",
+        "# Example usage\n",
+        "for p in fractionate(3):\n",
+        "    print(p)\n",
+        "\n",
+        "print()\n",
+        "\n",
+        "print(fractionate(5))"
+      ],
+      "cell_type": "code",
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "gcD6d2xA1PxD",
+        "outputId": "d69a6ca3-1af2-40c1-cc79-8c8f2e257c77"
+      },
+      "execution_count": null,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "1/3\n",
+            "1/3\n",
+            "1/3\n",
+            "\n",
+            "[Fraction(1, 5), Fraction(1, 5), Fraction(1, 5), Fraction(1, 5), Fraction(1, 5)]\n"
+          ]
+        }
+      ]
+    },
+    {
+      "source": [
+        "import string\n",
+        "\n",
+        "def separate_characters(my_string: str):\n",
+        "  \"\"\"\n",
+        "  Separates characters in a string into three strings based on their type:\n",
+        "  ASCII letters, punctuation, and other characters.\n",
+        "\n",
+        "  Args:\n",
+        "    my_string: The input string.\n",
+        "\n",
+        "  Returns:\n",
+        "    A tuple containing three strings: ASCII letters, punctuation, and other characters.\n",
+        "  \"\"\"\n",
+        "  letters = \"\"\n",
+        "  punctuation_chars = \"\"\n",
+        "  others = \"\"\n",
+        "\n",
+        "  for char in my_string:\n",
+        "    if char in string.ascii_letters:\n",
+        "      letters += char\n",
+        "    elif char in string.punctuation:\n",
+        "      punctuation_chars += char\n",
+        "    else:\n",
+        "      others += char\n",
+        "\n",
+        "  return (letters, punctuation_chars, others)\n",
+        "\n",
+        "# Example usage:\n",
+        "parts = separate_characters(\"Olé!!! Hey, are ümläüts wörking?\")\n",
+        "print(parts[0])\n",
+        "print(parts[1])\n",
+        "print(parts[2])"
+      ],
+      "cell_type": "code",
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "GPQVx7Aj5Qz1",
+        "outputId": "299b9b84-8324-4e39-dd8b-31685c58e6ec"
+      },
+      "execution_count": null,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "OlHeyaremltswrking\n",
+            "!!!,?\n",
+            "é   üäü ö\n"
+          ]
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "from datetime import datetime\n",
+        "day=int(input(\"day\"))\n",
+        "month=int(input(\"month:\"))\n",
+        "year=int(input(\"year\"))\n",
+        "old=datetime(year,month,day)\n",
+        "mil=datetime(2000,1,1)\n",
+        "ez=mil-old\n",
+        "if ez.days<0:\n",
+        "  print(\"You weren't born yet on the eve of the new millennium.\")\n",
+        "else:\n",
+        "  print(f\"{ez.days} days\")"
+      ],
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "eVzt8gqJKnYE",
+        "outputId": "b0b8138c-6d3a-45ce-af8a-b3ecd4c97723"
+      },
+      "execution_count": null,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "day10\n",
+            "month:10\n",
+            "year1999\n",
+            "83+days\n"
+          ]
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "def row_sums(my_matrix: list):\n",
+        "  for i in range(len(my_matrix)):\n",
+        "    sum=0\n",
+        "    for j in range(len(my_matrix[i])):\n",
+        "      sum+=my_matrix[i][j]\n",
+        "    my_matrix[i].append(sum)\n",
+        "  return my_matrix\n",
+        "print(row_sums([[1, 2, 3], [4, 5, 6], [7, 8, 9]]))"
+      ],
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "3ptvqBXhUZuH",
+        "outputId": "c607a5f9-9094-4bd4-ee82-2ccbd9089e32"
+      },
+      "execution_count": null,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "[[1, 2, 3, 6], [4, 5, 6, 15], [7, 8, 9, 24]]\n"
+          ]
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "class ExamResult:\n",
+        "  def __init__(self,name,grade1,grade2,grade3):\n",
+        "    self.name=name\n",
+        "    self.grade1=grade1\n",
+        "    self.grade2=grade2\n",
+        "    self.grade3=grade3\n",
+        "def best_resulta(results: list):\n",
+        "  return [max(result.grade1,result.grade2,result.grade3) for result in results]"
+      ],
+      "metadata": {
+        "id": "ZgxbH9-6rr50"
+      },
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "def add_numbers_to_list(numbers: list):\n",
+        "  if len(numbers)"
+      ],
+      "metadata": {
+        "id": "2sMf-cIBxgDI"
+      },
+      "execution_count": null,
+      "outputs": []
+    }
+  ]
+}
